@@ -11,7 +11,7 @@ def niveles(valor):
 
 # Cada nivel puede ponerse cualquier numero del 0 al 19 
 def valores(valor,cociente):
-    residuo = valor%cociente                #Se obtiene el residuo de realizar la division respecto a 20
+    residuo = valor%cociente                #Se obtiene el residuo de realizar la division respecto a un cociente
     return residuo                          #Si el residuo es cero significa que esa capa esta totalmente llena
 
     
@@ -32,8 +32,8 @@ def numeroMaya(numero):
     # Para el cero maya 
     residuo = valores(numero,5)
     
-    if (numero == 0):
-        image = np.concatenate((image, cero), axis=0)
+    if (numero == 0):  
+        image = np.concatenate((image, cero), axis=0) #axis=0 porque se concatena horizontalmente
     
     # Para el punto maya
     else:
@@ -55,8 +55,34 @@ def numeroMaya(numero):
 
     return image
 
+def resultado(valor):
+    
+    nivel = niveles(niveles(valor))
+    
+    # Iniciacion
+    residuo = valores(valor,20)
+    #Esta es la capa superior 
+    image = numeroMaya(residuo)
+    
+    for x in range(nivel-1):
+        
+        #Actualizacion de variable
+        valor = valor - residuo
+        residuo = valores(valor,pow(20,x+2))
+        
+        aux = numeroMaya(residuo)
+        aux = np.concatenate((image, aux), axis=0)
+            
+    return image
+        
 # Probar codigo
 #imagen = numeroMaya(20)
 #plt.imshow(imagen)
 #plt.axis("off")
 #plt.show()
+
+# Probar codigo
+imagen = resultado(400)
+plt.imshow(imagen)
+plt.axis("off")
+plt.show()
