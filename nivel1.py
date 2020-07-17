@@ -135,15 +135,37 @@ def unirNiveles(coeficientes,nivel):
     margen = cv2.imread('./Imagenes/margen.png')
     image = np.concatenate((image,margen),axis=0)
     return image
-    
-# Probar codigo
-valor = 8341
 
-nivel = niveles(valor) 
-print(nivel)
-coeficientes = getCoeficientes(valor)
-print(coeficientes)
-imagen = unirNiveles(coeficientes,nivel)
+# Permite escibir el valor dentro de la imagen
+def escribirValor(valor):
+    
+    image = cv2.imread('./Imagenes/margen.png')
+    fuente = cv2.FONT_HERSHEY_SIMPLEX
+    texto = str(valor)
+    
+    #Obtener tamano del texto
+    textsize = cv2.getTextSize(texto, fuente, 3, 5)[0]
+    
+    #Obtener coordenadas
+    X = (image.shape[1] - textsize[0]) / 2
+    Y = (image.shape[0] - textsize[1]) / 2
+    
+    # Escribir texto en la imagen
+    cv2.putText(image, texto, (X,Y+60), fuente, 3, (0, 0, 0), 5) # Se sumo 80 px a Y para colocar por debajo del centro
+    #cv2.putText(imagen,texto, (coordenadas),tamano fuente,(color RGB),grosor)
+    
+    return image 
+
+# Probar codigo
+valor = 8888
+
+#nivel = niveles(valor) 
+#print(nivel)
+#coeficientes = getCoeficientes(valor)
+#print(coeficientes)
+#imagen = unirNiveles(coeficientes,nivel)
+
+imagen=escribirValor(valor)
 plt.imshow(imagen)
 plt.axis("off")
 plt.show()
