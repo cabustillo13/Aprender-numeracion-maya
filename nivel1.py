@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 # Funcion para definir los niveles para escribir grandes cantidades.
 def niveles(valor):
     exponente = math.log(valor,20)  #Base 20
-    return (int(exponente)+1)       #Lleva +1 porque la primer capa arranca en 1
+    return (int(exponente)+1)       #Porque arranca desde el nivel 0       
 
 # Cada nivel puede ponerse cualquier numero del 0 al 19 
 def valores(valor,cociente):
@@ -57,7 +57,7 @@ def numeroMaya(numero):
 
 def resultado(valor):
     
-    nivel = niveles(niveles(valor))
+    nivel = niveles(valor)
     
     # Iniciacion
     residuo = valores(valor,20)
@@ -74,15 +74,47 @@ def resultado(valor):
         aux = np.concatenate((image, aux), axis=0)
             
     return image
-        
+  
 # Probar codigo
 #imagen = numeroMaya(20)
 #plt.imshow(imagen)
 #plt.axis("off")
 #plt.show()
 
-# Probar codigo
-imagen = resultado(400)
-plt.imshow(imagen)
-plt.axis("off")
-plt.show()
+#Acorde a la historia este sistema numeracion maya tiene cuatro niveles, que se utilizaban para escribir grandes cantidades.
+#Matematicamente f(x) = x1 + 20*x2 + 400*x3 + 8000*x4
+#def getCoeficientes(valor):
+#    x1,x2,x3,x4=0,0,0,0
+    
+#    x1 = valores(valor,20)
+#    valor = valor - x1
+    
+#    x4 = valor/8000
+#    valor = valor -8000*x4
+    
+#    x3 = valor/400
+#    valor = valor - 400*x3
+    
+#    x2 = valor/20
+#    valor = valor - 20*x2
+    
+#    return x4,x3,x2,x1
+
+#Probar codigo
+#x4,x3,x2,x1 = getCoeficientes(481)
+#print(x4,x3,x2,x1)
+
+def getCoeficientes(valor):
+    
+    coeficientes = list()
+    for i in range(4):
+        
+        x = (valor)/(20**(3-i))
+        valor = valor - (20**(3-i))*x
+        coeficientes.append(x)
+    
+    return coeficientes
+
+#Probar codigo
+#coeficientes = getCoeficientes(481)
+#print(coeficientes)
