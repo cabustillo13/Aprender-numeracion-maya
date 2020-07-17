@@ -6,8 +6,12 @@ import matplotlib.pyplot as plt
 # El sistema de numeracion maya tiene cuatro niveles.
 # Funcion para definir los niveles para escribir grandes cantidades.
 def niveles(valor):
-    exponente = math.log(valor,20)  #Base 20
-    return (int(exponente)+1)       #Porque arranca desde el nivel 0       
+    
+    if valor != 0:
+        exponente = math.log(valor,20)  #Base 20
+        return (int(exponente)+1)       #Porque arranca desde el nivel 0
+    else:
+        return 1
 
 # Cada nivel puede ponerse cualquier numero del 0 al 19 
 def valores(valor,cociente):
@@ -76,7 +80,7 @@ def resultado(valor):
     return image
   
 # Probar codigo
-#imagen = numeroMaya(20)
+#imagen = numeroMaya(19)
 #plt.imshow(imagen)
 #plt.axis("off")
 #plt.show()
@@ -117,10 +121,10 @@ def getCoeficientes(valor):
     return coeficientes
 
 #Probar codigo
-#coeficientes = getCoeficientes(481)
+#coeficientes = getCoeficientes(80001)
 #print(coeficientes)
 
-def unirNiveles(coeficientes,nivel):
+def unirNiveles(coeficientes,nivel,valor):
     
     for i in range(4):
         # Todo numero entero tiene al menos un nivel
@@ -133,7 +137,9 @@ def unirNiveles(coeficientes,nivel):
     
     # Terminamos la imagen con un pequeno margen
     margen = cv2.imread('./Imagenes/margen.png')
-    image = np.concatenate((image,margen),axis=0)
+    encabezado = escribirValor(valor)
+    image = np.concatenate((encabezado,image,margen),axis=0)
+    
     return image
 
 # Permite escibir el valor dentro de la imagen
@@ -144,31 +150,56 @@ def escribirValor(valor):
     texto = str(valor)
     
     #Obtener tamano del texto
-    textsize = cv2.getTextSize(texto, fuente, 3, 5)[0]
+    textsize = cv2.getTextSize(texto, fuente, 9, 5)[0]
     
     #Obtener coordenadas
     X = (image.shape[1] - textsize[0]) / 2
     Y = (image.shape[0] - textsize[1]) / 2
     
     # Escribir texto en la imagen
-    cv2.putText(image, texto, (X,Y+60), fuente, 3, (0, 0, 0), 5) # Se sumo 80 px a Y para colocar por debajo del centro
+    cv2.putText(image, texto, (X,Y+215), fuente, 9, (0, 0, 0), 5) # Se sumo 235 px a Y para colocar por debajo del centro
     #cv2.putText(imagen,texto, (coordenadas),tamano fuente,(color RGB),grosor)
     
-    return image 
+    return image
 
 # Probar codigo
-valor = 8888
+#valor = 80001
 
 #nivel = niveles(valor) 
 #print(nivel)
 #coeficientes = getCoeficientes(valor)
 #print(coeficientes)
-#imagen = unirNiveles(coeficientes,nivel)
+#imagen = unirNiveles(coeficientes,nivel,valor)
 
-imagen=escribirValor(valor)
-plt.imshow(imagen)
-plt.axis("off")
-plt.show()
+#imagen=escribirValor(valor)
+#plt.imshow(imagen)
+#plt.axis("off")
+#plt.show()
 
-cv2.imwrite("resultado.png",imagen)
+#cv2.imwrite("resultado.png",imagen)
 
+if __name__ == "__main__":
+    
+    #Numero a analizar
+    numero = input("Ingresar numero arabigo: ")
+    
+    #Recordad que el maximo valor que se puede representar, respetando los 4 niveles es 159999
+    if (numero <= 159999):
+        nivel = niveles(numero)
+        coeficientes = getCoeficientes(numero)
+        imagen = unirNiveles(coeficientes,nivel,numero)
+    
+        # Ver resultados
+        plt.imshow(imagen)
+        plt.axis("off")
+        plt.show()
+    
+        # Guardar imagen
+        # Como los nombres de archivos no pueden arrancar con un numero, anteponemos la letra A y luego el numero
+        path = "./Resultados/A" + str(numero) + ".png"
+        cv2.imwrite(path,imagen)
+    
+    else:
+        print("\nTu numero excede el rango permitido")
+        print("Segun la historia, solo se puede representar hasta el valor 159999")
+    
