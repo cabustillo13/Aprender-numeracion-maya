@@ -113,8 +113,35 @@ def getCoeficientes(valor):
         valor = valor - (20**(3-i))*x
         coeficientes.append(x)
     
+    #Los coeficientes se devuelven de esta forma [x4,x3,x2,x1]
     return coeficientes
 
 #Probar codigo
 #coeficientes = getCoeficientes(481)
 #print(coeficientes)
+
+def unirNiveles(coeficientes,nivel):
+    
+    for i in range(4):
+        # Todo numero entero tiene al menos un nivel
+        if (i==0):
+            image = numeroMaya(coeficientes[3-i])
+        else:
+            aux = numeroMaya(coeficientes[3-i])
+            if (i < nivel): #Se concatenara solo los valores que no superen el nivel maximo
+                image = np.concatenate((aux , image), axis=0)
+
+    return image
+    
+# Probar codigo
+valor = 32
+
+nivel = niveles(valor) 
+print(nivel)
+coeficientes = getCoeficientes(valor)
+print(coeficientes)
+imagen = unirNiveles(coeficientes,nivel)
+plt.imshow(imagen)
+plt.axis("off")
+plt.show()
+
