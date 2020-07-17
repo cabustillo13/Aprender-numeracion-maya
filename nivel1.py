@@ -20,14 +20,14 @@ def valores(valor,cociente):
 def numeroMaya(numero): 
     
     # Comenzamos la imagen con un pequeno margen, sobre cual empezaremos a concatenar
-    image = cv2.imread('./Imagenes1/margen.png')
+    image = cv2.imread('./Imagenes/margen.png')
     
-    cero = cv2.imread("./Imagenes1/A0.png")
-    uno = cv2.imread("./Imagenes1/A1.png")
-    dos = cv2.imread("./Imagenes1/A2.png")
-    tres = cv2.imread("./Imagenes1/A3.png")
-    cuatro = cv2.imread("./Imagenes1/A4.png")
-    cinco = cv2.imread("./Imagenes1/A5.png")
+    cero = cv2.imread("./Imagenes/A0.png")
+    uno = cv2.imread("./Imagenes/A1.png")
+    dos = cv2.imread("./Imagenes/A2.png")
+    tres = cv2.imread("./Imagenes/A3.png")
+    cuatro = cv2.imread("./Imagenes/A4.png")
+    cinco = cv2.imread("./Imagenes/A5.png")
     
     # Para el cero maya 
     residuo = valores(numero,5)
@@ -130,11 +130,14 @@ def unirNiveles(coeficientes,nivel):
             aux = numeroMaya(coeficientes[3-i])
             if (i < nivel): #Se concatenara solo los valores que no superen el nivel maximo
                 image = np.concatenate((aux , image), axis=0)
-
+    
+    # Terminamos la imagen con un pequeno margen
+    margen = cv2.imread('./Imagenes/margen.png')
+    image = np.concatenate((image,margen),axis=0)
     return image
     
 # Probar codigo
-valor = 32
+valor = 8341
 
 nivel = niveles(valor) 
 print(nivel)
@@ -144,4 +147,6 @@ imagen = unirNiveles(coeficientes,nivel)
 plt.imshow(imagen)
 plt.axis("off")
 plt.show()
+
+cv2.imwrite("resultado.png",imagen)
 
