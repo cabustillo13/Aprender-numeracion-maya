@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 # El sistema de numeracion maya tiene cuatro niveles.
 # Funcion para definir los niveles para escribir grandes cantidades.
-def niveles(valor):
+def getNiveles(valor):
     
     if valor != 0:
         exponente = math.log(valor,20)  #Base 20
@@ -61,7 +61,7 @@ def numeroMaya(numero):
 
 def resultado(valor):
     
-    nivel = niveles(valor)
+    nivel = getNiveles(valor)
     
     # Iniciacion
     residuo = valores(valor,20)
@@ -138,7 +138,7 @@ if __name__ == "__main__":
     
     #Recordad que el maximo valor que se puede representar, respetando los 4 niveles es 159999
     if (numero <= 159999):
-        nivel = niveles(numero)
+        nivel = getNiveles(numero)
         coeficientes = getCoeficientes(numero)
         imagen = unirNiveles(coeficientes,nivel,numero)
     
