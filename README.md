@@ -12,3 +12,6 @@ Por ejemplo: los símbolos de números arábigos modernos (0, 1, 2, 3, 4, 5, 6, 
 Particularmente en Honduras, debido a la presencia de la civilización maya en Centroamérica , en los primeros años de escuela te enseñan la numeración maya. A mí me pareció muy interesante cuando lo aprendí y quisiera compartirlo con ustedes de una manera poco convencional y moderna: con ayuda de Python.
 
 En la **Nota.pdf** se muestra todo el desarrollo.
+
+**Este código también fue publicado en la web del programador**
+https://www.lawebdelprogramador.com/codigo/Python/6359-Reto-Aprende-sistema-de-numeracion-maya-con-Python.html
