@@ -1,8 +1,11 @@
 # Aprender-numeracion-maya
 
+**Este código también fue publicado en la web del programador **
+https://www.lawebdelprogramador.com/codigo/Python/6359-Reto-Aprende-sistema-de-numeracion-maya-con-Python.html
+
 **¿QUÉ HACE ESTE PROGRAMA?**
 
-Es un programa que permite representar visualmente la conversión de los números arábigos modernos a los símbolos de numeración maya.
+Es un programa (hecho en python 2.7) que permite representar visualmente la conversión de los números arábigos modernos a los símbolos de numeración maya.
 
 **MOTIVACIÓN**
 
@@ -13,5 +16,8 @@ Particularmente en Honduras, debido a la presencia de la civilización maya en C
 
 En la **Nota.pdf** se muestra todo el desarrollo.
 
-**Este código también fue publicado en la web del programador**
-https://www.lawebdelprogramador.com/codigo/Python/6359-Reto-Aprende-sistema-de-numeracion-maya-con-Python.html
+**EJECUTAR PROGRAMA**
+
+Para comenzar a correr el programa escriba el siguiente comando en su terminal:
+
+```python maya.py```
