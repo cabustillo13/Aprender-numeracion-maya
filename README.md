@@ -1,6 +1,6 @@
 # Aprender-numeracion-maya
 
-**Este código también fue publicado en la web del programador** 
+**Este código también lo publiqué en la web del programador** 
 https://www.lawebdelprogramador.com/codigo/Python/6359-Reto-Aprende-sistema-de-numeracion-maya-con-Python.html
 
 **¿QUÉ HACE ESTE PROGRAMA?**
