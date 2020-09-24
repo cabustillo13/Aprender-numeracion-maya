@@ -1,7 +1,6 @@
 import math
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
 
 # El sistema de numeracion maya tiene cuatro niveles.
 # Funcion para definir los niveles para escribir grandes cantidades.
@@ -86,7 +85,8 @@ def getCoeficientes(valor):
     coeficientes = list()
     for i in range(4):
         
-        x = (valor)/(20**(3-i))
+        #Obtener el residuo
+        x = int((valor)/(20**(3-i)))
         valor = valor - (20**(3-i))*x
         coeficientes.append(x)
     
@@ -106,6 +106,7 @@ def unirNiveles(coeficientes,nivel,valor):
     
     # Terminamos la imagen con un pequeno margen
     margen = cv2.imread('./Imagenes/margen.png')
+    print(valor)
     encabezado = escribirValor(valor)
     image = np.concatenate((encabezado,image,margen),axis=0)
     
@@ -122,8 +123,8 @@ def escribirValor(valor):
     textsize = cv2.getTextSize(texto, fuente, 9, 5)[0]
     
     #Obtener coordenadas
-    X = (image.shape[1] - textsize[0]) / 2
-    Y = (image.shape[0] - textsize[1]) / 2
+    X = int((image.shape[1] - textsize[0]) / 2)
+    Y = int((image.shape[0] - textsize[1]) / 2)
     
     # Escribir texto en la imagen
     cv2.putText(image, texto, (X,Y+215), fuente, 9, (0, 0, 0), 5) # Se sumo 215 px a Y para colocar por debajo del centro
@@ -131,28 +132,15 @@ def escribirValor(valor):
     
     return image
 
-if __name__ == "__main__":
+def mayaMain(numero):    
     
-    #Numero a analizar
-    numero = input("Ingresar numero arabigo: ")
+    nivel = getNiveles(numero)
+    coeficientes = getCoeficientes(numero)
+    imagen = unirNiveles(coeficientes,nivel,numero)
     
-    #Recordad que el maximo valor que se puede representar, respetando los 4 niveles es 159999
-    if (numero <= 159999):
-        nivel = getNiveles(numero)
-        coeficientes = getCoeficientes(numero)
-        imagen = unirNiveles(coeficientes,nivel,numero)
+    # Guardar imagen
+    # Como los nombres de archivos no pueden arrancar con un numero, anteponemos la letra A y luego el numero
+    path = "./Resultados/A" + str(numero) + ".png"
+    cv2.imwrite(path,imagen)
     
-        # Ver resultados
-        plt.imshow(imagen)
-        plt.axis("off")
-        plt.show()
-    
-        # Guardar imagen
-        # Como los nombres de archivos no pueden arrancar con un numero, anteponemos la letra A y luego el numero
-        path = "./Resultados/A" + str(numero) + ".png"
-        cv2.imwrite(path,imagen)
-    
-    else:
-        print("\nTu numero excede el rango permitido")
-        print("Segun la historia, solo se puede representar hasta el valor 159999")
     
