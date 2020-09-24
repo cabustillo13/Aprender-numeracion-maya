@@ -5,7 +5,10 @@ https://www.lawebdelprogramador.com/codigo/Python/6359-Reto-Aprende-sistema-de-n
 
 **¿QUÉ HACE ESTE PROGRAMA?**
 
-Es un programa (hecho en python 2.7) que permite representar visualmente la conversión de los números arábigos modernos a los símbolos de numeración maya.
+Es un programa que permite representar visualmente la conversión de los números arábigos modernos a los símbolos de numeración maya.
+
+- La versión 1 está disponible tanto para Python 2.7 como Python 3.x
+- La versión 2 está disponible para Python 3.x . Cuenta con su propia GUI.
 
 **MOTIVACIÓN**
 
@@ -14,10 +17,3 @@ Por ejemplo: los símbolos de números arábigos modernos (0, 1, 2, 3, 4, 5, 6, 
 
 Particularmente en Honduras, debido a la presencia de la civilización maya en Centroamérica , en los primeros años de escuela te enseñan la numeración maya. A mí me pareció muy interesante cuando lo aprendí y quisiera compartirlo con ustedes de una manera poco convencional y moderna: con ayuda de Python.
 
-En la **Nota.pdf** se muestra todo el desarrollo.
-
-**EJECUTAR PROGRAMA**
-
-Para comenzar a correr el programa escriba el siguiente comando en su terminal:
-
-```python maya.py```
